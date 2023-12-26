@@ -4,8 +4,6 @@ import * as puppeteer from 'puppeteer';
 import { CustomWorld } from '../test/features/world';
 import { getEnv } from '../helper/env/env';
 
-let browser: puppeteer.Browser;
-
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
 BeforeAll(async function () {
@@ -13,9 +11,8 @@ BeforeAll(async function () {
 });
 
 Before(async function (this: CustomWorld) {
-    browser = await puppeteer.launch({headless: "new"});
-    this.browser = browser;
-    this.page = await browser.newPage();
+    this.browser = await puppeteer.launch({headless: "new"});
+    this.page = await this.browser.newPage();
 })
 
 After(async function (this: CustomWorld, {pickle, result}) {
@@ -31,7 +28,7 @@ After(async function (this: CustomWorld, {pickle, result}) {
         this.attach(img, {mediaType: 'image/png'});
     }
     
-    await browser.close();
+    await this.browser.close();
 });
 
 AfterAll(async function () {

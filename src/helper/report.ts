@@ -5,7 +5,7 @@ console.log("Running test report generator scripts");
 
 report.generate({
   jsonDir: "test-results",
-  reportPath: "./",
+  reportPath: "./test-results/html-report",
   reportName: "Puppeteer BDD PoC Report",
   pageTitle: "Test Report",
   displayDuration: true,

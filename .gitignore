@@ -1,0 +1,12 @@
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+
+# Misc
+test-results/
+features/
+assets/
+screenshots/
+@rerun.txt

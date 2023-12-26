@@ -5,6 +5,8 @@ try {
 
     remove("test-results/");
 
+    remove("@rerun.txt");
+
 } catch (error) {
     console.log(`Failed to delete directory!  ${error}`);
 }

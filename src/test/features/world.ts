@@ -15,3 +15,5 @@ class TestWorld extends World<CustomWorld> {
 setWorldConstructor(TestWorld);
 
 //Docs: https://github.com/cucumber/cucumber-js/blob/main/docs/support_files/world.md
+
+//NVM installation: https://github.com/coreybutler/nvm-windows/wiki#manual-installation

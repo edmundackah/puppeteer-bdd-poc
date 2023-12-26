@@ -30,6 +30,6 @@ Feature: Puppeteer PoC
 
     Scenario: Puppeteer Replay Demo
         Given I am on "http://uitestingplayground.com"
-        When I play the user flow recording "src\test\user_flows\test playground input test.json"
+        When I play the user flow recording "test playground input test.json"
         And I click the "#updatingButton" button
         Then "#updatingButton" will display "Recording Test"

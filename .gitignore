@@ -7,6 +7,7 @@ node_modules/
 # Misc
 test-results/
 assets/
+features/
 screenshots/
 @rerun.txt
 index.html

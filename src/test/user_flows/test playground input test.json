@@ -1,0 +1,99 @@
+{
+    "title": "test playground input test",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 835,
+            "height": 791,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://uitestingplayground.com/",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://uitestingplayground.com/",
+                    "title": "UI Test Automation Playground"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div:nth-of-type(2) > div:nth-of-type(4) a"
+                ]
+            ],
+            "offsetY": 25.399993896484375,
+            "offsetX": 79.39996337890625,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://uitestingplayground.com/textinput",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#newButtonName"
+                ]
+            ],
+            "offsetY": 17.79998779296875,
+            "offsetX": 213
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Recording T",
+            "selectors": [
+                [
+                    "#newButtonName"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "t",
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Recording Test",
+            "selectors": [
+                [
+                    "#newButtonName"
+                ]
+            ],
+            "target": "main"
+        }
+    ]
+}

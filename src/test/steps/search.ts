@@ -1,7 +1,12 @@
 import { Given, When, Then } from '@cucumber/cucumber';
+import { createRunner, parse } from '@puppeteer/replay';
+import { readFileSync } from "fs-extra";
+
+
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';
+import { Extension } from '../../hooks/runner_extension';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {
     await this.page?.goto(url);
@@ -17,6 +22,7 @@ When('I wait for {string} to render', async function (this: CustomWorld, selecto
 });
 
 When('I type {string} into {string} input field', async function (this: CustomWorld, text: string, selector: string) {
+    await this.page?.waitForSelector(selector);
     await this.page?.type(selector, text);
 });
 
@@ -24,9 +30,18 @@ When('I press Enter', async function(this: CustomWorld) {
     await this.page?.keyboard.press('Enter');
 });
 
+When('I play the user flow recording {string}', async function(this: CustomWorld, filename: string) {
+    const temp = readFileSync(filename, 'utf8');
+    const recording = parse(JSON.parse(temp));
+
+    const runner = await createRunner(recording, new Extension(this.browser, this.page, {timeout: 7000}));
+    await runner.run();
+});
+
 Then('{string} will display {string}', async function(this: CustomWorld, selector: string, text: string) {
     await this.page?.waitForSelector(selector);
-    let element = await this.page?.$(selector)
+    let element = await this.page?.$(selector);
+
     let value = await this.page?.evaluate(el => el?.textContent, element);
     await assert.equal(value, text);
 });

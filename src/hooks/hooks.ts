@@ -12,8 +12,9 @@ BeforeAll(async function () {
     getEnv();
 });
 
-Before(async function () {
+Before(async function (this: CustomWorld) {
     browser = await puppeteer.launch({headless: "new"});
+    this.browser = browser;
     this.page = await browser.newPage();
 })
 

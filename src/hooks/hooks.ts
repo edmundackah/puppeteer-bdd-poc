@@ -6,6 +6,8 @@ import { getEnv } from '../helper/env/env';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
+//Docs: https://github.com/cucumber/cucumber-js/blob/main/docs/support_files/world.md
+
 BeforeAll(async function () {
     getEnv();
 });
@@ -23,7 +25,7 @@ After(async function (this: CustomWorld, {pickle, result}) {
         const img:Buffer = await this.page?.screenshot({
             fullPage: true,
             encoding: "binary",
-            path: `./screenshots/${pickle.name}.png`
+            path: `test-results/screenshots/${pickle.name}.png`
         });
         this.attach(img, {mediaType: 'image/png'});
     }
@@ -32,5 +34,5 @@ After(async function (this: CustomWorld, {pickle, result}) {
 });
 
 AfterAll(async function () {
-    
+
 });

@@ -1,7 +1,7 @@
 declare var require: any
 const report = require("multiple-cucumber-html-reporter");
 
-console.log("Running test report generator scripts");
+console.log("\nRunning test report generator scripts\n");
 
 report.generate({
   jsonDir: "test-results",

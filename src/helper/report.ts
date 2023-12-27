@@ -2,10 +2,13 @@ declare var require: any
 const report = require("multiple-cucumber-html-reporter");
 
 import { DeviceInfo, getDeviceInfo } from '../helper/device-info';
+import { getEnv } from './env/env';
 
 console.log("\nRunning test report generator scripts\n");
 
 const device: DeviceInfo = getDeviceInfo();
+
+getEnv();
 
 report.generate({
   jsonDir: "test-results",
@@ -29,10 +32,9 @@ report.generate({
     data: [
       { label: "Project", value: "Custom project" },
       { label: "Build", value: "1.2.3" },
+      { label: "Test Environment", value: `${process.env.ENV}`},
       { label: "Browser Engine", value: device.client.engine},
-      { label: "Browser Engine Version", value: device.client.engine_version},
-      { label: "Execution Start Time", value: "Nov 19th 2017, 02:31 PM EST" },
-      { label: "Execution End Time", value: "Nov 19th 2017, 02:56 PM EST" },
+      { label: "Browser Engine Version", value: device.client.engine_version}
     ],
   },
 });

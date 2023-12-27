@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@puppeteer/replay": "^2.13.4",
-    "cucumber-assert": "^2.0.1",
-    "cucumber-junit-convert": "^2.1.1"
+    "cucumber-assert": "^2.0.1"
   }
 }

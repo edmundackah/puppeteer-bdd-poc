@@ -2,7 +2,6 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { createRunner, parse } from '@puppeteer/replay';
 import { readFileSync } from "fs-extra";
 
-
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';

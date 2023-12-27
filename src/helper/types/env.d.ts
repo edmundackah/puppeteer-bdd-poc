@@ -5,7 +5,7 @@ declare global {
         interface ProcessEnv {
             ENV: "local" | "dev" | "uat" | "nft"
             BASE_URL: string,
-            IS_HEADLESS: "new" | "false"
+            HEADLESS: string
         }
     }
 }

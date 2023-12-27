@@ -3,20 +3,20 @@ import * as puppeteer from 'puppeteer';
 
 import { CustomWorld } from '../test/features/world';
 import { getUserAgent } from '../helper/device-info';
-import { getEnv } from '../helper/env/env';
+import { getEnv, launchOptions } from '../helper/env/env';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
 //Docs: https://github.com/cucumber/cucumber-js/blob/main/docs/support_files/world.md
+
 
 BeforeAll(async function () {
     getEnv();
 });
 
 Before(async function (this: CustomWorld) {
-    this.browser = await puppeteer.launch({headless: "new"});
-    const userAgent: string = await this.browser?.userAgent();
-    getUserAgent(userAgent);
+    this.browser = await puppeteer.launch(launchOptions());
+    getUserAgent(await this.browser?.userAgent());
     this.page = await this.browser.newPage();
 })
 

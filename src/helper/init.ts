@@ -1,8 +1,8 @@
-import { ensureDir, emptyDir } from "fs-extra";
+import { ensureDirSync, emptyDirSync } from "fs-extra";
 
 try {
-    ensureDir("test-results/screenshots");
-    emptyDir("test-results/screenshots");
+    ensureDirSync("test-results/screenshots");
+    emptyDirSync("test-results/screenshots");
 
 } catch (error) {
     console.log(`Folder not created!  ${error}`);

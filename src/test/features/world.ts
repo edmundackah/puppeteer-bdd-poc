@@ -9,7 +9,7 @@ export interface CustomWorld extends World {
 class TestWorld extends World<CustomWorld> {
     constructor(options: IWorldOptions) {
         super(options);
-    }
+    } 
 }
 
 setWorldConstructor(TestWorld);

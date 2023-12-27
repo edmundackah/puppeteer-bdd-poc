@@ -1,11 +1,13 @@
-import { remove } from "fs-extra";
+import { removeSync } from "fs-extra";
 
 try {
     console.log("\nRunning clean-up script\n");
 
-    remove("test-results/");
+    removeSync("test-results/");
 
-    remove("@rerun.txt");
+    removeSync("@rerun.txt");
+
+    removeSync("user-agent.txt");
 
 } catch (error) {
     console.log(`Failed to delete directory!  ${error}`);

@@ -20,6 +20,7 @@
     "dotenv": "^16.3.1",
     "fs-extra": "^11.2.0",
     "multiple-cucumber-html-reporter": "^3.6.0",
+    "node-device-detector": "^2.0.17",
     "puppeteer": "^21.6.1",
     "ts-node": "^10.9.2"
   },

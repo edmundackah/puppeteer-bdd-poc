@@ -21,6 +21,7 @@
         ],
         "publishQuiet": false,
         "dryRun": false,
+        "retry": 1,
         "parallel": 4
     },
     "rerun": {

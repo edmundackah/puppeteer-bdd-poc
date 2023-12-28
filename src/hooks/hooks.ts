@@ -5,6 +5,7 @@ import { CustomWorld } from '../test/features/world';
 import { getUserAgent } from '../helper/device-info';
 import { getEnv, launchOptions } from '../helper/env/env';
 import { logger } from '../helper/logger';
+import { screenRecorder } from './screen-recorder';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
@@ -21,6 +22,7 @@ Before(async function (this: CustomWorld, {pickle}) {
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());
     this.page = await this.browser.newPage();
+    this.screenRecorder = await screenRecorder(this.page, pickle.name, `${pickle.id || ""}`, pickle.tags, this.logger);
 })
 
 After(async function (this: CustomWorld, {pickle, result}) {
@@ -36,6 +38,7 @@ After(async function (this: CustomWorld, {pickle, result}) {
     }
     
     await this.browser.close();
+    await this.screenRecorder?.stop();
     this.logger.end();
 });
 

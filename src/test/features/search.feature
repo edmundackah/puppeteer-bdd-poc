@@ -28,7 +28,7 @@ Feature: Puppeteer PoC
         And I click the "#updatingButton" button
         Then "#updatingButton" will display "I like pasta"
 
-    @recording
+    @record
     Scenario: Puppeteer Replay Demo
         Given I am on "http://uitestingplayground.com"
         When I play the user flow recording "test playground input test.json"

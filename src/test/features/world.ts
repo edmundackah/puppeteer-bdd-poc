@@ -1,11 +1,13 @@
 import { World, IWorldOptions, setWorldConstructor} from '@cucumber/cucumber';
+import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 import { Logger } from 'winston';
 import { Browser, Page } from 'puppeteer';
 
 export interface CustomWorld extends World {
     page?: Page;
     browser?: Browser;
-    logger: Logger; 
+    logger: Logger;
+    screenRecorder?: PuppeteerScreenRecorder; 
 }
 
 class TestWorld extends World<CustomWorld> {

@@ -5,7 +5,7 @@ import { readFileSync } from "fs-extra";
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';
-import { Extension } from '../../hooks/runner-extension';
+import { Extension } from '../../helper/extensions/runner-extension';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {
     await this.page?.goto(url);

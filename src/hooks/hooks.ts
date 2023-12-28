@@ -2,10 +2,10 @@ import {Before, BeforeAll, After, AfterAll, Status} from '@cucumber/cucumber';
 import * as puppeteer from 'puppeteer';
 
 import { CustomWorld } from '../test/features/world';
-import { getUserAgent } from '../helper/device-info';
+import { getUserAgent } from '../helper/extensions/device-info';
 import { getEnv, launchOptions } from '../helper/env/env';
-import { logger } from '../helper/logger';
-import { screenRecorder } from './screen-recorder';
+import { logger } from '../helper/extensions/logger';
+import { screenRecorder } from '../helper/extensions/screen-recorder';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 

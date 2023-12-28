@@ -1,8 +1,9 @@
 declare var require: any
 const report = require("multiple-cucumber-html-reporter");
 
-import { DeviceInfo, getDeviceInfo } from '../helper/device-info';
-import { getEnv } from './env/env';
+import { DeviceInfo, getDeviceInfo } from '../extensions/device-info';
+import { CucumberConverter } from 'cucumber-to-junit';
+import { getEnv } from '../env/env';
 
 console.log("\nRunning test report generator scripts\n");
 
@@ -38,3 +39,11 @@ report.generate({
     ],
   },
 });
+
+console.log("\ncreating junit reports\n");
+
+const converter = new CucumberConverter({
+  markUndefinedAsFailed: true // undefined scenario steps will fail the test case
+});
+
+converter.convertToJunit('test-results/cucumber-report.json','test-results/cucumber-report-junit.xml');

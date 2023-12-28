@@ -1,5 +1,6 @@
 Feature: Puppeteer PoC
 
+    @record
     Scenario: News - Pass
         Given I am on "https://wccftech.com/"
         And I wait for "#unic-b > div > div > div > div.flex.flex-col.m-auto.w-full.items-center.justify-center" to render

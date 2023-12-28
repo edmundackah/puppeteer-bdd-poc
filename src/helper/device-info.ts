@@ -2,7 +2,7 @@ import { writeFile, readFileSync } from 'fs-extra';
 
 const DeviceDetector = require('node-device-detector');
 
-const filename = "user-agent.txt";
+const filename = "test-results/user-agent.txt";
 
 export interface DeviceInfo {
     os: Os

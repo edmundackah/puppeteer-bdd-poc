@@ -15,7 +15,7 @@
         ],
         "format": [
             "progress-bar",
-            "rerun:@rerun.txt",
+            "rerun:test-results/@rerun.txt",
             "html:test-results/cucumber-report.html",
             "json:test-results/cucumber-report.json"
         ],
@@ -37,7 +37,7 @@
         ],
         "format": [
             "progress-bar",
-            "rerun:@rerun.txt",
+            "rerun:test-results/@rerun.txt",
             "html:test-results/cucumber-report.html",
             "json:test-results/cucumber-report.json"
         ],

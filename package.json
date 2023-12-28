@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pretest": "npx ts-node src/helper/init.ts",
-    "test": "cross-env ENV=local cucumber-js test || cross-env ENV=local npx ts-node src/helper/report.ts",
-    "test:failed": "cucumber-js -p rerun @rerun.txt",
+    "test": "cross-env ENV=ci cucumber-js || cross-env ENV=ci npx ts-node src/helper/report.ts",
+    "test:failed": "cross-env ENV=ci cucumber-js -p rerun test-results/@rerun.txt",
     "junit-report": "npx ts-node src/helper/cucumber-junit.ts",
     "cleanup": "npx ts-node src/helper/cleanup.ts"
   },
@@ -20,11 +20,14 @@
     "cross-env": "^7.0.3",
     "cucumber-to-junit": "^0.1.3",
     "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
     "fs-extra": "^11.2.0",
     "multiple-cucumber-html-reporter": "^3.6.0",
     "node-device-detector": "^2.0.17",
     "puppeteer": "^21.6.1",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "dependencies": {
     "@puppeteer/replay": "^2.13.4",

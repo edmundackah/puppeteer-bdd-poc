@@ -46,6 +46,7 @@ Run cleanup script
 
 ## Roadmap
 
+- Lighthouse report
 - PDF report generation
 - Add more integrations
 

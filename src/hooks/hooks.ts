@@ -16,7 +16,7 @@ BeforeAll(async function () {
 });
 
 Before(async function (this: CustomWorld, {pickle}) {
-    this.logger = logger(`${pickle.name}:${pickle.id}`);
+    this.logger = logger(pickle.name, `${pickle.id || ""}`);
 
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());
@@ -27,11 +27,10 @@ After(async function (this: CustomWorld, {pickle, result}) {
     
     //screenshot on test failure
     if (result?.status == Status.FAILED) {
-        //@ts-ignore
+        const filename = `${pickle.name} ${pickle.id || ""}`;
         const img: Buffer = await this.page?.screenshot({
             fullPage: true,
-            encoding: "binary",
-            path: `test-results/screenshots/${pickle.name}.png`
+            path: `test-results/screenshots/${filename}.png`
         });
         this.attach(img, {mediaType: 'image/png'});
     }

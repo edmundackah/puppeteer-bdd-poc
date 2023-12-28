@@ -4,6 +4,7 @@ import * as puppeteer from 'puppeteer';
 import { CustomWorld } from '../test/features/world';
 import { getUserAgent } from '../helper/device-info';
 import { getEnv, launchOptions } from '../helper/env/env';
+import { logger } from '../helper/logger';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
@@ -14,7 +15,9 @@ BeforeAll(async function () {
     getEnv();
 });
 
-Before(async function (this: CustomWorld) {
+Before(async function (this: CustomWorld, {pickle}) {
+    this.logger = logger(`${pickle.name}:${pickle.id}`);
+
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());
     this.page = await this.browser.newPage();
@@ -34,8 +37,9 @@ After(async function (this: CustomWorld, {pickle, result}) {
     }
     
     await this.browser.close();
+    this.logger.end();
 });
 
-AfterAll(async function () {
+AfterAll(async function (this: CustomWorld) {
     
 });

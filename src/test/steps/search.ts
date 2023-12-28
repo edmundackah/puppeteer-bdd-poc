@@ -30,8 +30,9 @@ When('I press Enter', async function(this: CustomWorld) {
 });
 
 When('I play the user flow recording {string}', async function(this: CustomWorld, filename: string) {
-    const temp = readFileSync(`src/test/user_flows/${filename}`, 'utf8');
-    const recording = parse(JSON.parse(temp));
+    const path = `src/test/user_flows/${filename}`;
+    this.logger.info(`Reading userflow recording: ${path}`);
+    const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
 
     const runner = await createRunner(recording, new Extension(this.browser, this.page, {timeout: 7000}));
     await runner.run();

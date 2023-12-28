@@ -1,9 +1,11 @@
 import { World, IWorldOptions, setWorldConstructor} from '@cucumber/cucumber';
+import { Logger } from 'winston';
 import * as puppeteer from 'puppeteer';
 
 export interface CustomWorld extends World {
     page?: puppeteer.Page;
     browser?: puppeteer.Browser;
+    logger: Logger; 
 }
 
 class TestWorld extends World<CustomWorld> {

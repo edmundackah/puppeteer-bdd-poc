@@ -7,6 +7,7 @@
     "pretest": "npx ts-node src/helper/init.ts",
     "test": "cross-env ENV=ci cucumber-js || cross-env ENV=ci npx ts-node src/helper/extensions/report.ts",
     "test:failed": "cross-env ENV=ci cucumber-js -p rerun test-results/@rerun.txt",
+    "posttest": "cross-env ENV=ci npx ts-node src/helper/extensions/report.ts",
     "cleanup": "npx ts-node src/helper/cleanup.ts"
   },
   "keywords": [],

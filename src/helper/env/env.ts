@@ -1,5 +1,5 @@
 import * as dotenv  from 'dotenv';
-import * as puppeteer from 'puppeteer';
+import { PuppeteerLaunchOptions } from 'puppeteer';
 
 export const getEnv = () => {
 
@@ -9,6 +9,6 @@ export const getEnv = () => {
     });
 }
 
-export const launchOptions = () : puppeteer.PuppeteerLaunchOptions => {
-    return JSON.parse(process.env.HEADLESS) as puppeteer.PuppeteerLaunchOptions;
+export const launchOptions = () : PuppeteerLaunchOptions => {
+    return JSON.parse(process.env.HEADLESS) as PuppeteerLaunchOptions;
 }

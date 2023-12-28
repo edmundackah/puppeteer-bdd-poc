@@ -1,10 +1,10 @@
 import { World, IWorldOptions, setWorldConstructor} from '@cucumber/cucumber';
 import { Logger } from 'winston';
-import * as puppeteer from 'puppeteer';
+import { Browser, Page } from 'puppeteer';
 
 export interface CustomWorld extends World {
-    page?: puppeteer.Page;
-    browser?: puppeteer.Browser;
+    page?: Page;
+    browser?: Browser;
     logger: Logger; 
 }
 

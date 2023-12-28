@@ -1,4 +1,4 @@
-import {Before, BeforeAll, After, AfterAll, Status} from '@cucumber/cucumber';
+import { setDefaultTimeout, Before, BeforeAll, After, AfterAll, Status} from '@cucumber/cucumber';
 import * as puppeteer from 'puppeteer';
 
 import { CustomWorld } from '../test/features/world';
@@ -10,7 +10,6 @@ import { screenRecorder } from '../helper/extensions/screen-recorder';
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
 //Docs: https://github.com/cucumber/cucumber-js/blob/main/docs/support_files/world.md
-
 
 BeforeAll(async function () {
     getEnv();
@@ -37,8 +36,8 @@ After(async function (this: CustomWorld, {pickle, result}) {
         this.attach(img, {mediaType: 'image/png'});
     }
     
-    await this.browser.close();
     await this.screenRecorder?.stop();
+    await this.browser.close();
     this.logger.end();
 });
 

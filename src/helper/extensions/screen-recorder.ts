@@ -1,5 +1,6 @@
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 import { PickleTag } from '@cucumber/messages';
+import { PassThrough } from 'stream';
 import { Logger } from 'winston';
 import { Page } from 'puppeteer';
 
@@ -22,10 +23,14 @@ const Config = {
 };
 
 const includesRecordTag = (tags: readonly PickleTag[], logger: Logger) : Boolean => {
-  if (tags.find(t => t.name === '@record')) {
-    logger.info(`env variable SKIP_VIDEO set to ${process.env.SKIP_VIDEO}`);
-    return process.env.SKIP_VIDEO === "false" ? true : false;
-  } else return false;
+  if (process.env.RECORD_ALL === "false") {
+    if (tags.find(t => t.name === '@record')) {
+      return true;
+    } else return false;
+  } else {
+    logger.info(`env variable RECORD_ALL set to ${process.env.RECORD_ALL}`);
+    return true;
+  }
 }
 
 export const screenRecorder = async (page: Page, scenarioName: string, sessionId: string, tags: readonly PickleTag[], logger: Logger) : Promise<PuppeteerScreenRecorder> => {

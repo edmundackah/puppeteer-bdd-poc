@@ -5,8 +5,8 @@ declare global {
         interface ProcessEnv {
             ENV: "local" | "dev" | "uat" | "nft" | "ci"
             BASE_URL: string,
-            HEADLESS: string
-            SKIP_VIDEO: string
+            LAUNCH_OPTIONS: string
+            RECORD_ALL: "false" | "true"
         }
     }
 }

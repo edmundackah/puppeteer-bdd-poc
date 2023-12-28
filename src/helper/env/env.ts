@@ -10,5 +10,5 @@ export const getEnv = () => {
 }
 
 export const launchOptions = () : PuppeteerLaunchOptions => {
-    return JSON.parse(process.env.HEADLESS) as PuppeteerLaunchOptions;
+    return JSON.parse(process.env.LAUNCH_OPTIONS) as PuppeteerLaunchOptions;
 }

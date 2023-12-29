@@ -1,4 +1,5 @@
 import { Before, BeforeAll, After, AfterAll, Status } from '@cucumber/cucumber';
+import { mkdirSync } from "fs-extra";
 import * as puppeteer from 'puppeteer';
 
 import { CustomWorld } from '../test/features/world';
@@ -16,7 +17,9 @@ BeforeAll(async function () {
 });
 
 Before(async function (this: CustomWorld, {pickle}) {
-    this.logger = logger(pickle.name, `${pickle.id || ""}`);
+    this.scenarioName = pickle.name;
+    this.sessionId = `${pickle.id || ""}`;
+    this.logger = logger(this.scenarioName, this.sessionId);
 
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());
@@ -28,10 +31,11 @@ After(async function (this: CustomWorld, {pickle, result}) {
     
     //screenshot on test failure
     if (result?.status == Status.FAILED) {
-        const filename = `${pickle.name} ${pickle.id || ""}`;
+        const basePath = `test-results/screenshots/${pickle.name}/`;
+        mkdirSync(basePath, { recursive: true });
         const img: Buffer = await this.page?.screenshot({
             fullPage: true,
-            path: `test-results/screenshots/${filename}.png`
+            path: `${basePath}${pickle.id || ""}.png`
         });
         this.attach(img, {mediaType: 'image/png'});
     }

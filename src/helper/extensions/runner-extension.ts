@@ -32,11 +32,10 @@ export class LighthouseExtension extends LighthouseRunnerExtension {
   }
   
   async createFlowResult() {
-    await this.beforeAllSteps();
     const result = await super.createFlowResult();
-    this.logger.info(`generating lighthouse user flow analysis result:  ${result}`);
     return result;
   }
+
 }
 
 export class Extension extends PuppeteerRunnerExtension {

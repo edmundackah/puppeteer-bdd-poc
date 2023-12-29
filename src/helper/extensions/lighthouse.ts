@@ -1,31 +1,34 @@
-// import { Logger } from 'winston';
+declare var require: any
+const ReportGenerator = import("lighthouse/report/generator/report-generator.js");
+import { LighthouseExtension } from './runner-extension';
+import { createRunner, parse } from '@puppeteer/replay';
+import { readFileSync, writeFileSync, mkdirSync } from "fs-extra";
+import { Browser, Page } from 'puppeteer';
+import { Logger } from 'winston';
 
-// import { LighthouseExtension } from './runner-extension';
-// import { createRunner, parse } from '@puppeteer/replay';
-// import { CustomWorld } from '../../test/features/world';
-// import { readFileSync } from "fs-extra";
+export async function analyseUserFlow (logger: Logger, browser: Browser, page: Page, filename: string, scenarioName: string, sessionId: string) {
+    const path = `src/test/user_flows/${filename}`;
+    const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
 
-
-// export async function analyseUserFlow (this: CustomWorld, filename: string, scenarioName: string, sessionId: string) {
-//     const path = `src/test/user_flows/${filename}`;
-//     this.logger.info(`Reading userflow recording: ${path}`);
-//     const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
-
-//     const extension = new LighthouseExtension(this.logger, this.browser, this.page, {timeout: 7000});
-//     const lighthouse = await createRunner(recording, extension);
-
-//     lighthouse.run();
-//     await extension.createFlowResult();
-// }
-
-// export const generateUserFlowReport = async (scenarioName: string, sessionId: string, logger: Logger, lighthouse?: LighthouseExtension) => {
+    const extension = new LighthouseExtension(logger, browser, page, {timeout: 7000});
+    const lighthouse = await createRunner(recording, extension);
     
-//     //const result = await lighthouse?.createFlowResult();
+    //run lighthouse report
+    await lighthouse.run();
 
-//     const path = `./test-results/logs/${scenarioName}/${sessionId}/`;
+    //save lighthouse report results
+    const result = await extension.createFlowResult();
 
-//     logger.info(`writing lighthouse reports to : ${path}`);
+    //create save directory
+    const reportBasePath = `./test-results/lighthouse/${scenarioName}`;
+    mkdirSync(reportBasePath, { recursive: true });
 
-//     // writeFileSync(`${path}/report.html`, await flow.generateReport());
-//     // writeFileSync(`${path}/flow-result.json`, JSON.stringify(await flow.createFlowResult(), null, 2));
-// }
+    const reportPath = `${reportBasePath}/user-flow-${sessionId}`;
+
+    const html = (await ReportGenerator).ReportGenerator.generateFlowReportHtml(result);
+
+    logger.info(`saving lighthouse reports to: ${reportPath}`);
+
+    writeFileSync(`${reportPath}.html`, html);
+    writeFileSync(`${reportPath}.json`, JSON.stringify(result));
+}

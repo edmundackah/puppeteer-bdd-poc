@@ -1,12 +1,10 @@
-
 # Puppeteer BDD PoC
 
 BDD wrapper for Puppeteer
 
-
 ## Features
-
 - Environment specific configuration
+- Lighthouse User Flow Reports
 - Video Recorder
 - Puppeteer User Flow JSON support
 - Screenshot
@@ -17,22 +15,20 @@ BDD wrapper for Puppeteer
 - CI report generator (JUnit)
 - Centralised Logging
 
-
 ## Installation
 
 Install project with npm
-
 ```bash
   npm install
 ```
-    
+
 ## Running Tests
 
 To run tests, run the following command
-
 ```bash
   npm test
 ```
+
 Retry failed tests
 ```bash
   npm run test:failed
@@ -43,13 +39,10 @@ Run cleanup script
   npm run cleanup
 ```
 
-
 ## Roadmap
 
-- Lighthouse report
 - PDF report generation
 - Add more integrations
-
 
 ## Reference Docs
 

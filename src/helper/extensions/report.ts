@@ -1,4 +1,4 @@
-declare var require: any
+// declare var require: any
 const report = require("multiple-cucumber-html-reporter");
 
 import { DeviceInfo, getDeviceInfo } from '../extensions/device-info';
@@ -12,7 +12,7 @@ const device: DeviceInfo = getDeviceInfo();
 getEnv();
 
 report.generate({
-  jsonDir: "test-results",
+  jsonDir: "./test-results",
   reportPath: "./test-results/html-report",
   reportName: "Puppeteer BDD PoC Report",
   pageTitle: "Test Report",

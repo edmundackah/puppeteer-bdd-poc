@@ -1,6 +1,6 @@
-import { writeFile, readFileSync } from 'fs-extra';
+import DeviceDetector from 'node-device-detector';
 
-const DeviceDetector = require('node-device-detector');
+import { writeFile, readFileSync } from 'fs-extra';
 
 const filename = "test-results/user-agent.txt";
 

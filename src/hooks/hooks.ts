@@ -36,7 +36,7 @@ After(async function (this: CustomWorld, {pickle, result}) {
         const img: Buffer = await this.page?.screenshot({
             fullPage: true,
             path: `${basePath}${pickle.id || ""}.png`
-        });
+        }) as Buffer;
         this.attach(img, {mediaType: 'image/png'});
     }
     

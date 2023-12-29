@@ -1,6 +1,5 @@
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 import { PickleTag } from '@cucumber/messages';
-import { PassThrough } from 'stream';
 import { Logger } from 'winston';
 import { Page } from 'puppeteer';
 

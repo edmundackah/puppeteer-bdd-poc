@@ -1,4 +1,4 @@
-import { setDefaultTimeout, Before, BeforeAll, After, AfterAll, Status} from '@cucumber/cucumber';
+import { Before, BeforeAll, After, AfterAll, Status } from '@cucumber/cucumber';
 import * as puppeteer from 'puppeteer';
 
 import { CustomWorld } from '../test/features/world';

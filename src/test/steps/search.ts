@@ -5,7 +5,7 @@ import { readFileSync } from "fs-extra";
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';
-import { Extension } from '../../helper/extensions/runner-extension';
+import { Extension, LighthouseExtension } from '../../helper/extensions/runner-extension';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {
     await this.page?.goto(url);
@@ -36,6 +36,18 @@ When('I play the user flow recording {string}', async function(this: CustomWorld
 
     const runner = await createRunner(recording, new Extension(this.logger, this.browser, this.page, {timeout: 7000}));
     await runner.run();
+});
+
+When('I generate a Lighthouse User Flow report from {string}', async function(this: CustomWorld, filename: string, {pickle, result}) {
+    const path = `src/test/user_flows/${filename}`;
+    this.logger.info(`Reading for lighthouse userflow recording: ${path}`);
+    const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
+
+    const extension = new LighthouseExtension(this.logger, this.browser, this.page, {timeout: 7000});
+    const lighthouse = await createRunner(recording, extension);
+
+    lighthouse.runBeforeAllSteps();
+    await extension.createFlowResult();
 });
 
 Then('{string} will display {string}', async function(this: CustomWorld, selector: string, text: string) {

@@ -35,3 +35,4 @@ Feature: Puppeteer PoC
         When I play the user flow recording "test playground input test.json"
         And I click the "#updatingButton" button
         Then "#updatingButton" will display "Recording Test"
+        And I generate a Lighthouse User Flow report from "test playground input test.json"

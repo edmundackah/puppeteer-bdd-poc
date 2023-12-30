@@ -4,6 +4,7 @@ BDD wrapper for Puppeteer
 
 ## Features
 - Environment specific configuration
+- Network Speed Presets
 - Lighthouse User Flow Reports
 - Video Recorder
 - Puppeteer User Flow JSON support

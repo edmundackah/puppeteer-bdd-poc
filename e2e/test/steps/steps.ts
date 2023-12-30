@@ -5,7 +5,7 @@ import { readFileSync } from "fs-extra";
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';
-import { ReplayExtension, LighthouseExtension } from '../../helper/extensions/runner-extension';
+import { ReplayExtension } from '../../helper/extensions/runner-extension';
 import { analyseUserFlow } from '../../helper/extensions/lighthouse';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {

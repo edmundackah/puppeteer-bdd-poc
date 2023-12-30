@@ -23,4 +23,4 @@ const includesScreenshotTag = (tags: readonly PickleTag[], logger: Logger) : Boo
         logger.info(`screenshot tag detected`);
         return true;
     } else return false;
-  }
+}

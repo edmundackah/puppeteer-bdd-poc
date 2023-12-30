@@ -23,7 +23,7 @@ const Config = {
 
 const includesRecordTag = (tags: readonly PickleTag[], logger: Logger) : Boolean => {
   if (process.env.RECORD_ALL === "false") {
-    if (tags.find(t => t.name === '@record')) {
+    if (tags.find(t => t.name === '@Record')) {
       return true;
     } else return false;
   } else {

@@ -19,7 +19,7 @@ export async function screenshot(result: TestStepResult, world: CustomWorld) {
 }
 
 const includesScreenshotTag = (tags: readonly PickleTag[], logger: Logger) : Boolean => {
-    if (tags.find(t => t.name === '@screenshot')) {
+    if (tags.find(t => t.name === '@Screenshot')) {
         logger.info(`screenshot tag detected`);
         return true;
     } else return false;

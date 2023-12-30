@@ -1,10 +1,12 @@
 import { World, IWorldOptions, setWorldConstructor } from '@cucumber/cucumber';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
-import { Logger } from 'winston';
+import { Pickle } from '@cucumber/messages';
 import { Browser, Page } from 'puppeteer';
+import { Logger } from 'winston';
 
 export interface CustomWorld extends World {
     page?: Page;
+    pickle?: Pickle;
     browser?: Browser;
     logger: Logger;
     scenarioName?: string;

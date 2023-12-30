@@ -1,6 +1,9 @@
 import { LighthouseRunnerExtension, PuppeteerRunnerExtension, Step, UserFlow } from '@puppeteer/replay';
+import { TestStepResultStatus } from '@cucumber/messages';
 import { Browser, Page } from 'puppeteer';
 import { Logger } from 'winston';
+import { screenshot } from './screenshot';
+import { CustomWorld } from '../../test/features/world';
 
 export class LighthouseExtension extends LighthouseRunnerExtension {
 
@@ -40,30 +43,32 @@ export class LighthouseExtension extends LighthouseRunnerExtension {
 
 export class Extension extends PuppeteerRunnerExtension {
 
-  logger: Logger;
+  world: CustomWorld;
 
-  constructor(winstonLogger: Logger, browser: Browser, page: Page, opts?: Object) {
+  constructor(worldState: CustomWorld, browser: Browser, page: Page, opts?: Object) {
     super(browser, page, opts);
-    this.logger = winstonLogger;
+    this.world = worldState;
   }
 
   async beforeAllSteps(flow: UserFlow) {
     await super.beforeAllSteps(flow);
-    this.logger.info('starting user flow');
+    this.world.logger.info('starting user flow');
   }
 
   async beforeEachStep(step: Step, flow: UserFlow) {
     await super.beforeEachStep(step, flow);
-    this.logger.info(`before 	${JSON.stringify(step)}`);
+    this.world.logger.info(`before 	${JSON.stringify(step)}`);
   }
 
   async afterEachStep(step: Step, flow: UserFlow) {
     await super.afterEachStep(step, flow);
-    this.logger.info(`after 	${JSON.stringify(step)}`);
+    await screenshot(null, this.world);
+    this.world.logger.info(`after 	${JSON.stringify(step)}`);
   }
 
   async afterAllSteps(flow: UserFlow) {
     await super.afterAllSteps(flow);
-    this.logger.info('user flow complete');
+    await screenshot(null, this.world);
+    this.world.logger.info('user flow complete');
   }
 }

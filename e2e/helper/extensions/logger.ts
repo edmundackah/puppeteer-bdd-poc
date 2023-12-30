@@ -1,6 +1,7 @@
 import { transports, format, createLogger, Logger, LoggerOptions } from 'winston';
+import { CustomWorld } from '../../test/features/world';
 
-export const options = (scenarioName: string, sessionId: string) : LoggerOptions => {
+export const options = (world: CustomWorld) : LoggerOptions => {
 
     const formatter = format.combine(
         format.timestamp({format: 'MMM-DD-YYYY HH:mm:ss'}),
@@ -13,14 +14,15 @@ export const options = (scenarioName: string, sessionId: string) : LoggerOptions
             //new transports.Console({ format: formatter }),
             new transports.File({
                 handleExceptions: true,
-                filename: `${sessionId}.log`,
-                dirname: `./test-results/logs/${scenarioName}/`,
+                handleRejections: true,
+                filename: `${world.sessionId}.log`,
+                dirname: `./test-results/logs/${world.scenarioName}/`,
                 format: formatter
             })
         ]
     };
 }
 
-export const logger = (scenarioName: string, sessionId: string) : Logger => {
-    return createLogger(options(scenarioName, sessionId));
+export const logger = (world: CustomWorld) : Logger => {
+    return createLogger(options(world));
 }

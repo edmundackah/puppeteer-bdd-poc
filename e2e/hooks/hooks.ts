@@ -18,10 +18,10 @@ BeforeAll(async function () {
 });
 
 Before(async function (this: CustomWorld, {pickle}) {
-    this.logger = logger(this.scenarioName, this.sessionId);
     this.pickle = pickle;
     this.scenarioName = pickle.name;
     this.sessionId = `${pickle.id || ""}`;
+    this.logger = logger(this);
 
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());

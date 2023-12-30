@@ -7,7 +7,7 @@ import { Browser, Page } from 'puppeteer';
 import { Logger } from 'winston';
 
 export async function analyseUserFlow (logger: Logger, browser: Browser, page: Page, filename: string, scenarioName: string, sessionId: string) {
-    const path = `src/test/user_flows/${filename}`;
+    const path = `e2e/test/user_flows/${filename}`;
     const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
 
     const extension = new LighthouseExtension(logger, browser, page, {timeout: 7000});

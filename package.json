@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "npx ts-node src/helper/init.ts",
-    "test": "cross-env ENV=ci cucumber-js || npx cross-env ENV=ci ts-node src/helper/extensions/report.ts",
+    "pretest": "npx ts-node e2e/helper/init.ts",
+    "test": "cross-env ENV=ci cucumber-js || npx cross-env ENV=ci ts-node e2e/helper/extensions/report.ts",
     "test:failed": "cross-env ENV=ci cucumber-js -p rerun test-results/@rerun.txt",
-    "posttest": "npx cross-env ENV=ci ts-node src/helper/extensions/report.ts",
-    "cleanup": "npx ts-node src/helper/cleanup.ts"
+    "posttest": "npx cross-env ENV=ci ts-node e2e/helper/extensions/report.ts",
+    "cleanup": "npx ts-node e2e/helper/cleanup.ts"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,7 @@ export const getEnv = () => {
 
     dotenv.config({
         override: true,
-        path: `src/helper/env/.env.${process.env.ENV}`
+        path: `e2e/helper/env/.env.${process.env.ENV}`
     });
 }
 

@@ -31,7 +31,7 @@ When('I press Enter', async function(this: CustomWorld) {
 });
 
 When('I play the user flow recording {string}', async function(this: CustomWorld, filename: string) {
-    const path = `src/test/user_flows/${filename}`;
+    const path = `e2e/test/user_flows/${filename}`;
     this.logger.info(`Reading userflow recording: ${path}`);
     const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
 

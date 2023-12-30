@@ -5,7 +5,7 @@
         "moduleResolution": "NodeNext",
         "typeRoots": [
             "./node_modules/@types",
-            "src/helper/types"
+            "e2e/helper/types"
         ]
     }
 }

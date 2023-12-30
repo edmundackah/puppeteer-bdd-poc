@@ -5,7 +5,7 @@ import { readFileSync } from "fs-extra";
 var assert = require('cucumber-assert');
 
 import { CustomWorld } from '../features/world';
-import { Extension, LighthouseExtension } from '../../helper/extensions/runner-extension';
+import { ReplayExtension, LighthouseExtension } from '../../helper/extensions/runner-extension';
 import { analyseUserFlow } from '../../helper/extensions/lighthouse';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {
@@ -35,7 +35,7 @@ When('I play the user flow recording {string}', async function(this: CustomWorld
     this.logger.info(`Reading userflow recording: ${path}`);
     const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
 
-    const runner = await createRunner(recording, new Extension(this, this.browser, this.page, {timeout: 7000}));
+    const runner = await createRunner(recording, new ReplayExtension(this, this.browser, this.page, {timeout: 7000}));
     await runner.run();
 });
 

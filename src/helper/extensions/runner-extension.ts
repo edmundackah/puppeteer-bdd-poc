@@ -41,7 +41,7 @@ export class LighthouseExtension extends LighthouseRunnerExtension {
 
 }
 
-export class Extension extends PuppeteerRunnerExtension {
+export class ReplayExtension extends PuppeteerRunnerExtension {
 
   world: CustomWorld;
 

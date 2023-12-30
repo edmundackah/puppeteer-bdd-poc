@@ -12,7 +12,7 @@ const device: DeviceInfo = getDeviceInfo();
 getEnv();
 
 report.generate({
-  jsonDir: "./test-results",
+  jsonDir: "cucumber",
   reportPath: "./test-results/html-report",
   reportName: "Puppeteer BDD PoC Report",
   pageTitle: "Test Report",
@@ -46,4 +46,4 @@ const converter = new CucumberConverter({
   markUndefinedAsFailed: true // undefined scenario steps will fail the test case
 });
 
-converter.convertToJunit('test-results/cucumber-report.json','test-results/cucumber-report-junit.xml');
+converter.convertToJunit('cucumber/report.json','test-results/cucumber-report-junit.xml');

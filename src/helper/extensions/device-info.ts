@@ -1,4 +1,4 @@
-import DeviceDetector from 'node-device-detector';
+import DeviceDetector from "node-device-detector";
 
 import { writeFile, readFileSync } from 'fs-extra';
 

@@ -16,8 +16,8 @@
         "format": [
             "progress-bar",
             "rerun:test-results/@rerun.txt",
-            "html:test-results/cucumber-report.html",
-            "json:test-results/cucumber-report.json"
+            "html:cucumber/report.html",
+            "json:cucumber/report.json"
         ],
         "publishQuiet": false,
         "dryRun": false,
@@ -38,8 +38,8 @@
         "format": [
             "progress-bar",
             "rerun:test-results/@rerun.txt",
-            "html:test-results/cucumber-report.html",
-            "json:test-results/cucumber-report.json"
+            "html:cucumber/report.html",
+            "json:cucumber/report.json"
         ],
         "publishQuiet": false,
         "dryRun": false,

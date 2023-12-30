@@ -7,6 +7,7 @@ import { getUserAgent } from '../helper/extensions/device-info';
 import { getEnv, launchOptions } from '../helper/env/env';
 import { logger } from '../helper/extensions/logger';
 import { screenRecorder } from '../helper/extensions/screen-recorder';
+import { screenshot } from '../helper/extensions/screenshot';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
@@ -17,9 +18,10 @@ BeforeAll(async function () {
 });
 
 Before(async function (this: CustomWorld, {pickle}) {
+    this.logger = logger(this.scenarioName, this.sessionId);
+    this.pickle = pickle;
     this.scenarioName = pickle.name;
     this.sessionId = `${pickle.id || ""}`;
-    this.logger = logger(this.scenarioName, this.sessionId);
 
     this.browser = await puppeteer.launch(launchOptions());
     getUserAgent(await this.browser?.userAgent());
@@ -29,16 +31,7 @@ Before(async function (this: CustomWorld, {pickle}) {
 
 After(async function (this: CustomWorld, {pickle, result}) {
     
-    //screenshot on test failure
-    if (result?.status == Status.FAILED) {
-        const basePath = `test-results/screenshots/${pickle.name}/`;
-        mkdirSync(basePath, { recursive: true });
-        const img: Buffer = await this.page?.screenshot({
-            fullPage: true,
-            path: `${basePath}${pickle.id || ""}.png`
-        }) as Buffer;
-        this.attach(img, {mediaType: 'image/png'});
-    }
+    await screenshot(result, this);
     
     await this.screenRecorder?.stop();
     await this.browser.close();

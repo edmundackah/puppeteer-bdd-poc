@@ -1,7 +1,8 @@
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 import { PickleTag } from '@cucumber/messages';
 import { Logger } from 'winston';
-import { Page } from 'puppeteer';
+import { Page, Product } from 'puppeteer';
+import { CustomWorld } from '../../test/features/world';
 
 const Config = {
     followNewTab: true,
@@ -32,11 +33,11 @@ const includesRecordTag = (tags: readonly PickleTag[], logger: Logger) : Boolean
   }
 }
 
-export const screenRecorder = async (page: Page, scenarioName: string, sessionId: string, tags: readonly PickleTag[], logger: Logger) : Promise<PuppeteerScreenRecorder> => {
-    if (includesRecordTag(tags, logger)) {
-      const recorder = new PuppeteerScreenRecorder(page, Config);
-      const path = `test-results/videos/${scenarioName}/${sessionId}.mp4`;  // supports extension - mp4, avi, webm and mov
-      logger.info(`recording current scenario:  ${path}`);
+export const screenRecorder = async (world: CustomWorld) : Promise<PuppeteerScreenRecorder> => {
+    if (includesRecordTag(world.pickle.tags, world.logger)) {
+      const recorder = new PuppeteerScreenRecorder(world.page, Config);
+      const path = `test-results/videos/${world.pickle.name}/${world.browserName}-${world.pickle.id || ""}.mp4`;  // supports extension - mp4, avi, webm and mov
+      world.logger.info(`recording current scenario to:  ${path}`);
       return await recorder.start(path);
     }
 

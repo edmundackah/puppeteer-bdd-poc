@@ -1,7 +1,9 @@
 import { LighthouseRunnerExtension, PuppeteerRunnerExtension, Step, UserFlow } from '@puppeteer/replay';
-import { TestStepResultStatus } from '@cucumber/messages';
+import { createRunner, parse } from '@puppeteer/replay';
 import { Browser, Page } from 'puppeteer';
+import { readFileSync } from "fs-extra";
 import { Logger } from 'winston';
+
 import { screenshot } from './screenshot';
 import { CustomWorld } from '../../test/features/world';
 
@@ -71,4 +73,13 @@ export class ReplayExtension extends PuppeteerRunnerExtension {
     await screenshot(null, this.world);
     this.world.logger.info('user flow complete');
   }
+}
+
+export const replayRecording = async (world: CustomWorld, filename: string) => {
+  const path = `e2e/test/user_flows/${filename}`;
+  world.logger.info(`Reading userflow recording: ${path}`);
+  const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
+
+  const runner = await createRunner(recording, new ReplayExtension(world, world.browser, world.page, {timeout: 7000}));
+  await runner.run();
 }

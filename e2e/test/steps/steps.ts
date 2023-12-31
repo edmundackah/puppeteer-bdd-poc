@@ -1,12 +1,12 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { createRunner, parse } from '@puppeteer/replay';
-import { readFileSync } from "fs-extra";
 
 var assert = require('cucumber-assert');
 
-import { CustomWorld } from '../features/world';
-import { ReplayExtension } from '../../helper/extensions/runner-extension';
+import { replayRecording } from '../../helper/extensions/runner-extension';
 import { analyseUserFlow } from '../../helper/extensions/lighthouse';
+import { launchConfig } from '../../helper/helper';
+import { CustomWorld } from '../features/world';
+import { Product } from 'puppeteer';
 
 Given('I am on {string}', async function(this: CustomWorld, url: string) {
     await this.page?.goto(url);
@@ -15,10 +15,6 @@ Given('I am on {string}', async function(this: CustomWorld, url: string) {
 When('I click the {string} button', async function (this: CustomWorld, selector: string) {
     await this.page?.waitForSelector(selector);
     await this.page?.click(selector);
-});
-
-When('I wait for {string} to render', async function (this: CustomWorld, selector: string) {
-    await this.page?.waitForSelector(selector);
 });
 
 When('I type {string} into {string} input field', async function (this: CustomWorld, text: string, selector: string) {
@@ -31,16 +27,15 @@ When('I press Enter', async function(this: CustomWorld) {
 });
 
 When('I play the user flow recording {string}', async function(this: CustomWorld, filename: string) {
-    const path = `e2e/test/user_flows/${filename}`;
-    this.logger.info(`Reading userflow recording: ${path}`);
-    const recording = parse(JSON.parse(readFileSync(path, 'utf8')));
-
-    const runner = await createRunner(recording, new ReplayExtension(this, this.browser, this.page, {timeout: 7000}));
-    await runner.run();
+    await replayRecording(this, filename);
 });
 
 When('I generate a Lighthouse User Flow report from {string}', {timeout: 50 * 1000}, async function(this: CustomWorld, filename: string) {
-    await analyseUserFlow(this.logger, this.browser, this.page, filename, this.scenarioName, this.sessionId);
+    await analyseUserFlow(this, filename);
+});
+
+When('I have created a {string} browser instance', async function(this: CustomWorld, browser: string) {
+    await launchConfig(this, (browser as unknown) as Product, false);
 });
 
 Then('{string} will display {string}', async function(this: CustomWorld, selector: string, text: string) {

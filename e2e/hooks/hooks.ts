@@ -1,20 +1,17 @@
-import { Before, BeforeAll, After, AfterAll } from '@cucumber/cucumber';
-import * as puppeteer from 'puppeteer';
+import { Before, BeforeAll, After, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
 
 import { CustomWorld } from '../test/features/world';
-import { getUserAgent } from '../helper/extensions/device-info';
-import { getEnv, launchOptions } from '../helper/env/env';
-import { logger } from '../helper/extensions/logger';
-import { screenRecorder } from '../helper/extensions/screen-recorder';
 import { screenshot } from '../helper/extensions/screenshot';
-import { configureNetwork } from '../helper/extensions/network';
+import { getEnv, launchConfig } from '../helper/helper';
 
 //Docs: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 
 //Docs: https://github.com/cucumber/cucumber-js/blob/main/docs/support_files/world.md
 
 
-BeforeAll(async function () {
+setDefaultTimeout(500 * 1000);
+
+BeforeAll(async function (this: CustomWorld) {
     getEnv();
 });
 
@@ -22,13 +19,8 @@ Before(async function (this: CustomWorld, {pickle}) {
     this.pickle = pickle;
     this.scenarioName = pickle.name;
     this.sessionId = `${pickle.id || ""}`;
-    this.logger = logger(this);
 
-    this.browser = await puppeteer.launch(launchOptions());
-    getUserAgent(await this.browser?.userAgent());
-    this.page = await this.browser.newPage();
-    await configureNetwork(this);
-    this.screenRecorder = await screenRecorder(this.page, pickle.name, `${pickle.id || ""}`, pickle.tags, this.logger);
+    await launchConfig(this, 'chrome', true);
 })
 
 After(async function (this: CustomWorld, {pickle, result}) {

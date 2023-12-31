@@ -8,7 +8,7 @@ import { CustomWorld } from '../../test/features/world';
 export async function screenshot(result: TestStepResult, world: CustomWorld) {
     //screenshot on test failure or when tag is present
     if (includesScreenshotTag(world.pickle.tags, world.logger) === true || result?.status === Status.FAILED) {
-        const basePath = `test-results/screenshots/${world.pickle.name}/${world.pickle.id || ""}/`;
+        const basePath = `test-results/screenshots/${world.pickle.name}/${world.pickle.id || ""}/${world.browserName}/`;
         mkdirSync(basePath, { recursive: true });
         const img: Buffer = await world.page.screenshot({
             fullPage: true,

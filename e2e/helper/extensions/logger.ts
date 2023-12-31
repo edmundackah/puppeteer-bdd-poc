@@ -1,4 +1,5 @@
 import { transports, format, createLogger, Logger, LoggerOptions } from 'winston';
+
 import { CustomWorld } from '../../test/features/world';
 
 export const options = (world: CustomWorld) : LoggerOptions => {
@@ -15,7 +16,7 @@ export const options = (world: CustomWorld) : LoggerOptions => {
             new transports.File({
                 handleExceptions: true,
                 handleRejections: true,
-                filename: `${world.sessionId}.log`,
+                filename: `${world.browserName}-${world.sessionId}.log`,
                 dirname: `./test-results/logs/${world.scenarioName}/`,
                 format: formatter
             })

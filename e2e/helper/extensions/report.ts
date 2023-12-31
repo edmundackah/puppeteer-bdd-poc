@@ -3,7 +3,7 @@ const report = require("multiple-cucumber-html-reporter");
 
 import { DeviceInfo, getDeviceInfo } from '../extensions/device-info';
 import { CucumberConverter } from 'cucumber-to-junit';
-import { getEnv } from '../env/env';
+import { getEnv } from '../helper';
 
 console.log("\nRunning test report generator scripts\n");
 

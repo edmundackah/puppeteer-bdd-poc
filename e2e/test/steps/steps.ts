@@ -1,3 +1,4 @@
+declare var require: any
 import { Given, When, Then } from '@cucumber/cucumber';
 import { createRunner, parse } from '@puppeteer/replay';
 import { readFileSync } from "fs-extra";
@@ -24,6 +25,11 @@ When('I wait for {string} to render', async function (this: CustomWorld, selecto
 When('I type {string} into {string} input field', async function (this: CustomWorld, text: string, selector: string) {
     await this.page?.waitForSelector(selector);
     await this.page?.type(selector, text);
+});
+
+When('the page title should be {string}', async function (this: CustomWorld, text: string) {
+    const pageTitle: string = await this.page?.title();
+    await assert.equal(pageTitle, text);
 });
 
 When('I press Enter', async function(this: CustomWorld) {

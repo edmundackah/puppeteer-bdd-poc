@@ -30,6 +30,11 @@ Feature: Puppeteer PoC
         And I click the "#updatingButton" button
         Then "#updatingButton" will display "I like pasta"
 
+    Scenario: Page Title Test
+        Given I am on "http://uitestingplayground.com/textinput"
+        When I type "I like pasta" into "#newButtonName" input field
+        Then the page title should be "Text Input"
+    
     @Record
     Scenario: Puppeteer Replay Demo
         Given I am on "http://uitestingplayground.com"

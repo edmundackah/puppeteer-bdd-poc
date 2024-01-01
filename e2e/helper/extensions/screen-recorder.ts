@@ -3,7 +3,7 @@ import { PickleTag } from '@cucumber/messages';
 import { Logger } from 'winston';
 import { Page } from 'puppeteer';
 
-const Config = {
+const config = {
     followNewTab: true,
     fps: 25,
     ffmpeg_Path: null,
@@ -34,7 +34,7 @@ const includesRecordTag = (tags: readonly PickleTag[], logger: Logger) : Boolean
 
 export const screenRecorder = async (page: Page, scenarioName: string, sessionId: string, tags: readonly PickleTag[], logger: Logger) : Promise<PuppeteerScreenRecorder> => {
     if (includesRecordTag(tags, logger)) {
-      const recorder = new PuppeteerScreenRecorder(page, Config);
+      const recorder = new PuppeteerScreenRecorder(page, config);
       const path = `test-results/videos/${scenarioName}/${sessionId}.mp4`;  // supports extension - mp4, avi, webm and mov
       logger.info(`recording current scenario:  ${path}`);
       return await recorder.start(path);

@@ -57,11 +57,10 @@ const findPreset = (world: CustomWorld) : NetworkConditions => {
 export const configureNetwork = async (world: CustomWorld) => {
     const preset: NetworkConditions = findPreset(world);
 
-    world.logger.info(`setting preset ${JSON.stringify(preset)}`);
-
     if (preset !== null) {
-        await world.page.emulateNetworkConditions(preset);
+      world.logger.info(`setting preset ${JSON.stringify(preset)}`);
+      await world.page.emulateNetworkConditions(preset);
     } else {
-        world.logger.info("no matching network presets found...");
+      world.logger.info("no matching network presets found...");
     }
 }

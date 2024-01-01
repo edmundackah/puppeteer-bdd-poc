@@ -43,6 +43,6 @@
         ],
         "publishQuiet": false,
         "dryRun": false,
-        "parallel": 2
+        "parallel": 4
     }
 }

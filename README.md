@@ -21,6 +21,18 @@ BDD wrapper for Puppeteer
 
 ## Installation <a id="installation"></a>
 
+Install Typescript
+```bash
+npm install --global typescript
+```
+
+> Note: You can run `npm install --global typescript@x.x.x` replacing the x with a verison number to install a specific version of Typescript.
+
+To verify the installation, run the following command:
+```bash
+tsc -v
+```
+
 Install project with npm
 
 ```bash

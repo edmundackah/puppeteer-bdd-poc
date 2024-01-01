@@ -60,15 +60,15 @@ Run cleanup script
 ### Test reports  <a id="item-two"></a>
 The default cucumber report is stored in the `cucumber` directory. A custom report with search, system info and other metrics is accessible from `test-results\html-report`
 
-![Custom Cucumber Report](docs\images\custom-cucumber-report.png "Cucumber report")
+![Custom Cucumber Report](docs/images/custom-cucumber-report.png "Cucumber report")
 
 > Note: The report includes a dark mode toggle, for those who like dark mode.
 
-![Custom Cucumber Report - System Info](docs\images\custom-cucumber-report-3.png "Custom Cucumber Report - System Info")
+![Custom Cucumber Report - System Info](docs/images/custom-cucumber-report-3.png "Custom Cucumber Report - System Info")
 
 Screenshots created by the `@Screenshot` tag are embedded in the report, under the relevant scenarios. Also embedded is the stack trace from failing step definitions and a screenshot at the point of failure.
 
-![Failing Scenario](docs\images\custom-cucumber-report-2.png "Failing Scenario")
+![Failing Scenario](docs/images/custom-cucumber-report-2.png "Failing Scenario")
 
 > Note: You can modify the information embedded in the custom report at `e2e/helper/extensions/report.ts`
 
@@ -116,7 +116,7 @@ In your scenario, add the step-def below to generate a Lighthouse report
 And I generate a Lighthouse User Flow report from "<filename>"
 ```
 
-![Lighthouse User Flow Report](docs\images\lighthouse-report-2.png "Lighthouse User Flow Report")
+![Lighthouse User Flow Report](docs/images/lighthouse-report-2.png "Lighthouse User Flow Report")
 
 > Note: `filename` should exclude the `e2e\test\user_flows` base path.
 
@@ -149,7 +149,7 @@ Should you need to simulate network performance in your test. You use a selectio
 ### Test Logs <a id="item-eight"></a>
 This project uses the [Winston Logging library](https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport) for log processing. Logs for a test run can be found in the following directory `test-results\logs\{scenarioName}`
 
-![Winston Logs](docs\images\log-file.png "Winston Logs")
+![Winston Logs](docs/images/log-file.png "Winston Logs")
 
 > Note: You can modify the logging config at `e2e\helper\extensions\logger.ts`
 

@@ -15,6 +15,7 @@ BDD wrapper for Puppeteer
   - [CI-CD Test Report](#ci-cd)
   - [Parallel Test Execution](#parallel-execution)
 - [Installation](#installation)
+- [GitLab-CI Docker Image](#gitlab-ci-image)
 - [Running Tests](#running-tests)
 - [Roadmap](#roadmap)
 - [Reference Docs](#reference-docs)
@@ -38,6 +39,45 @@ Install project with npm
 ```bash
 npm install
 ```
+
+## GitLab-CI Docker Image <a id="gitlab-ci-image"></a>
+
+This Dockerfile can be used to create a self-contained image for running Puppeteer tests in GitLab runners
+
+
+```docker
+FROM node:20-alpine
+
+# Installs latest Chromium (121) package.
+RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont \
+      yarn
+
+# Tell Puppeteer to skip installing Chrome
+# launch puppeteer with: browser.launch({executablePath: '/usr/bin/chromium-browser'})
+ENV PUPPETEER_SKIP_DOWNLOAD true
+
+# Puppeteer v21.9.0 works with Chromium 121.
+RUN yarn add puppeteer@21.9.0
+
+# Add user so we don't need --no-sandbox.
+RUN addgroup -S pptruser && adduser -S -G pptruser pptruser \
+    && mkdir -p /home/pptruser/Downloads /app \
+    && chown -R pptruser:pptruser /home/pptruser \
+    && chown -R pptruser:pptruser /app
+
+# Run everything after as non-privileged user.
+USER pptruser
+
+CMD echo "Image for Gitlab CI automated testing" && node
+```
+
+> Note: Set the Puppeteer executablePath to `/usr/bin/chromium-browser`
     
 ## Running Tests <a id="running-tests"></a>
 
